@@ -148,16 +148,11 @@ function spawnEchoForm(x, y, that, selectedString) {
   y += 20;
   that.echoForm.style.top = y + "px";
 
-  var shortenedUrlLength = 25; //subject to change based on length of shortered URL
-  var editableEchoHighLight = selectedString.length;
-  var lengthOfUserText = that.echoText.value.length;
-  var charCount = shortenedUrlLength + editableEchoHighLight + lengthOfUserText;
-  that.echoTextCharCount.innerHTML = charCount;
-
   body = document.getElementsByTagName("body")[0];
   body.appendChild(that.echoForm);
-  updateCharColor(charCount);
-  updateUserFeedback(that, shortenedUrlLength);
+  that.echoTextCharCount.innerHTML = updateCharCount();
+  updateCharColor(updateCharCount())
+  updateUserFeedback(that);
   return true;
 };
 
@@ -172,13 +167,19 @@ function updateCharColor(charCount) {
   }
 };
 
-function updateUserFeedback(that, shortenedUrlLength) {
-  that.echoLeftWrapper.addEventListener("keydown", function(event) {
-    editableEchoHighLight = that.echoHighLight.value.length;
-    lengthOfUserText = that.echoText.value.length;
-    charCount = shortenedUrlLength + editableEchoHighLight + lengthOfUserText;
-    that.echoTextCharCount.innerHTML = charCount;
+function updateCharCount() {
+  var shortenedUrlLength = 25; //subject to change based on length of shortered URL
+  var userEchoTextCount = document.getElementById("userEchoText").value.length;
+  var userHighLightCount = document.getElementById("userHighLight").value.length;
+  return shortenedUrlLength + userHighLightCount + userEchoTextCount;
+};
 
-    updateCharColor(charCount);
-  });
+function updateUserFeedback(that) {
+  var inputFields = ["userEchoText", "userHighLight"];
+  for (i in inputFields) {
+    document.getElementById(inputFields[i]).addEventListener("keydown", function(event) {
+      that.echoTextCharCount.innerHTML = updateCharCount();
+      updateCharColor(updateCharCount());
+    });
+  }
 };
