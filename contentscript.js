@@ -177,7 +177,7 @@ function updateCharCount() {
 function updateUserFeedback(that) {
   var inputFields = ["userEchoText", "userHighLight"];
   for (i in inputFields) {
-    document.getElementById(inputFields[i]).addEventListener("keydown", function(event) {
+    document.getElementById(inputFields[i]).addEventListener("keyup", function(event) {
       that.echoTextCharCount.innerHTML = updateCharCount();
       updateCharColor(updateCharCount());
     });
