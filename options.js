@@ -99,6 +99,7 @@ function showFacebookSettings(){
 
 function postChangeListen(){
   evalTwitterChanges();
+  evalFacebookChanges();
 };
 
 function evalTwitterChanges(){
@@ -116,6 +117,26 @@ function evalTwitterChanges(){
       checkbox.removeAttribute("checked");
       chrome.storage.sync.set({"twitterOn":false}, function(response){
         console.log("twitter posting disabled");
+      });
+    };
+  });
+};
+
+function evalFacebookChanges(){
+  document.getElementById("facebook-switch-listener").addEventListener("click", function(event){
+    event.preventDefault();
+    var checkbox = document.getElementById("facebook-toggle")
+    var oldStatus = checkbox.getAttribute("checked");
+
+    if(!oldStatus){
+      checkbox.setAttribute("checked", true);
+      chrome.storage.sync.set({"facebookOn":true}, function(response){
+        console.log("facebook posting enabled");
+      });
+    } else {
+      checkbox.removeAttribute("checked");
+      chrome.storage.sync.set({"facebookOn":false}, function(response){
+        console.log("facebook posting disabled");
       });
     };
   });
