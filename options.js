@@ -66,12 +66,10 @@ function facebookOauthStarter() {
   });
 };
 
-
 function showPostSettings(){
   showTwitterSettings();
   showFacebookSettings();
 };
-
 
 function showTwitterSettings(){
   chrome.storage.sync.get("twitterOn", function(result){
