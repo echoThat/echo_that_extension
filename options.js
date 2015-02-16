@@ -2,6 +2,7 @@ document.addEventListener('DOMContentLoaded', function() {
   userRailsOauth();
   twitterOauthStarter();
   facebookOauthStarter();
+  showPostSettings();
 });
 
 
@@ -63,3 +64,35 @@ function facebookOauthStarter() {
     RailsFacebookOauth();
   });
 };
+
+
+function showPostSettings(){
+  showTwitterSettings();
+  showFacebookSettings();
+};
+
+
+function showTwitterSettings(){
+  chrome.storage.sync.get("twitterOn", function(result){
+    var twitterStatus = (result.twitterOn);
+
+    if( twitterStatus === false ){
+      document.getElementById('twitter-toggle').removeAttribute('checked');
+    } else {
+      document.getElementById('twitter-toggle').setAttribute('checked', true);
+    };
+  });
+};
+
+function showFacebookSettings(){
+  chrome.storage.sync.get("facebookOn", function(result){
+    var facebookStatus = (result.facebookOn);
+
+    if( facebookStatus === false ){
+      document.getElementById('facebook-toggle').removeAttribute('checked');
+    } else {
+      document.getElementById('facebook-toggle').setAttribute('checked', true);
+    };
+  });
+};
+
