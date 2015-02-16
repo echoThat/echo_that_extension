@@ -3,6 +3,7 @@ document.addEventListener('DOMContentLoaded', function() {
   twitterOauthStarter();
   facebookOauthStarter();
   showPostSettings();
+  postChangeListen();
 });
 
 
@@ -92,6 +93,30 @@ function showFacebookSettings(){
       document.getElementById('facebook-toggle').removeAttribute('checked');
     } else {
       document.getElementById('facebook-toggle').setAttribute('checked', true);
+    };
+  });
+};
+
+function postChangeListen(){
+  evalTwitterChanges();
+};
+
+function evalTwitterChanges(){
+  document.getElementById("twitter-switch-listener").addEventListener("click", function(event){
+    event.preventDefault();
+    var checkbox = document.getElementById("twitter-toggle")
+    var oldStatus = checkbox.getAttribute("checked");
+
+    if(!oldStatus){
+      checkbox.setAttribute("checked", true);
+      chrome.storage.sync.set({"twitterOn":true}, function(response){
+        console.log("twitter posting enabled");
+      });
+    } else {
+      checkbox.removeAttribute("checked");
+      chrome.storage.sync.set({"twitterOn":false}, function(response){
+        console.log("twitter posting disabled");
+      });
     };
   });
 };
