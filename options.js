@@ -164,7 +164,7 @@ function sendAnyUserChanges(){
 };
 
 function sendToggle(userEmail, outletOn, booleanTerm){
-  var postUrl = "http://localhost:3000/api/toggle?"+outletOn+"="+booleanTerm+"&google_credentials="+userEmail;
+  var postUrl = "http://www.thatecho.co/api/toggle?"+outletOn+"="+booleanTerm+"&google_credentials="+userEmail;
   return new Promise(function(resolve, reject){
     var request = new XMLHttpRequest();
     request.open('post', postUrl, true);
