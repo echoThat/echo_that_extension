@@ -98,6 +98,7 @@ function showFacebookSettings(){
 function postChangeListen(){
   evalTwitterChanges();
   evalFacebookChanges();
+  sendAnyUserChanges();
 };
 
 function evalTwitterChanges(){
@@ -140,3 +141,43 @@ function evalFacebookChanges(){
   });
 };
 
+function sendAnyUserChanges(){
+  chrome.storage.onChanged.addListener(function(changes, namespace) {
+
+    new Promise(function(resolve, reject){
+      chrome.storage.sync.get("chrome_token", function(result){
+        resolve(result.chrome_token);
+        reject(Error("Unable to retrieve echoThat token"));
+      });
+
+    }).then(function(response){
+      for (key in changes) {
+        var booleanTerm = changes[key].newValue;
+        sendToggle(response, key, booleanTerm);
+      };
+    });
+  });
+};
+
+function sendToggle(userToken, outletOn, booleanTerm){
+  var url = "http://localhost:3000/api/toggle?"+outletOn+"="+booleanTerm+"&google_credentials="+userToken;
+  return new Promise(function(resolve, reject){
+
+    var request = new XMLHttpRequest();
+    request.open('post', url, true);
+    request.onload = function(){
+      if(request.status == 200){
+        resolve(request.response);
+      }
+      else {
+        reject(Error(request.statusText));
+      }
+    };
+
+    request.onerror = function() {
+      reject(Error("Network Error"));
+    };
+
+    request.send();
+  });
+};
