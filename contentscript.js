@@ -80,17 +80,19 @@ function hideSpawnedEcho() {
   document.onmousedown = function(event4) {
     var echoFrame = document.getElementsByClassName("echo-frame")[0];
 
-    if (spawnedEcho && !checkClickEventWithinForm(event, echoFrame)) {
+    if (!checkClickEventWithinForm(event, echoFrame)) {
       closeEchoForm();
     };
   };
 };
 
 function closeEchoForm() {
-  var echoFrame = document.getElementsByClassName("echo-frame")[0];
-  document.body.removeChild(echoFrame);
-  echoFormExists = false;
-  spawnedEcho = false;
+  if (spawnedEcho) {
+    var echoFrame = document.getElementsByClassName("echo-frame")[0];
+    document.body.removeChild(echoFrame);
+    echoFormExists = false;
+    spawnedEcho = false;
+  };
 };
 
 function checkClickEventWithinForm(event, parent) {
