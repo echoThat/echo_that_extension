@@ -26,9 +26,7 @@ function rangeIsSelected() {
 function closeEchoFormAfterSubmit() {
   echoThat();
   setTimeout(function(){
-    var echoFrame = document.getElementsByClassName("echo-frame")[0];
-    body.removeChild(echoFrame);
-    echoFormExists = false;
+    closeEchoForm();
   }, 1250);
 };
 
@@ -74,11 +72,16 @@ function hideSpawnedEcho() {
     var echoFrame = document.getElementsByClassName("echo-frame")[0];
 
     if (spawnedEcho && !checkClickEventWithinForm(event, echoFrame)) {
-      body.removeChild(echoFrame);
-      echoFormExists = false;
-      spawnedEcho = false;
+      closeEchoForm();
     };
   };
+};
+
+function closeEchoForm() {
+  var echoFrame = document.getElementsByClassName("echo-frame")[0];
+  document.body.removeChild(echoFrame);
+  echoFormExists = false;
+  spawnedEcho = false;
 };
 
 function checkClickEventWithinForm(event, parent) {
