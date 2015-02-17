@@ -110,12 +110,12 @@ function evalTwitterChanges(){
     if(!oldStatus){
       checkbox.setAttribute("checked", true);
       chrome.storage.sync.set({"twitterOn":true}, function(response){
-        console.log("twitter posting enabled");
+        console.log("echoThat to twitter enabled");
       });
     } else {
       checkbox.removeAttribute("checked");
       chrome.storage.sync.set({"twitterOn":false}, function(response){
-        console.log("twitter posting disabled");
+        console.log("echoThat to twitter disabled");
       });
     };
   });
@@ -130,12 +130,12 @@ function evalFacebookChanges(){
     if(!oldStatus){
       checkbox.setAttribute("checked", true);
       chrome.storage.sync.set({"facebookOn":true}, function(response){
-        console.log("facebook posting enabled");
+        console.log("echoThat to facebook enabled");
       });
     } else {
       checkbox.removeAttribute("checked");
       chrome.storage.sync.set({"facebookOn":false}, function(response){
-        console.log("facebook posting disabled");
+        console.log("echoThat to facebook disabled");
       });
     };
   });
