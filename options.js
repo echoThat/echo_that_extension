@@ -143,24 +143,30 @@ function evalFacebookChanges(){
 
 function sendAnyUserChanges(){
   chrome.storage.onChanged.addListener(function(changes, namespace) {
+    for(key in changes){
+    if(key === "chrome_token"){
+      return "echoThat token set";
+    }
+    else {
+      new Promise(function(resolve, reject){
+        chrome.identity.getProfileUserInfo(function(userInfo){
+          resolve(userInfo.email);
+          reject(Error("Unable to retrieve userInfo for echoThat"));
+        });
 
-    new Promise(function(resolve, reject){
-      chrome.storage.sync.get("chrome_token", function(result){
-        resolve(result.chrome_token);
-        reject(Error("Unable to retrieve echoThat token"));
-      });
-
-    }).then(function(response){
-      for (key in changes) {
-        var booleanTerm = changes[key].newValue;
-        sendToggle(response, key, booleanTerm);
+      }).then(function(response){
+          for(outletOn in changes[key].newValue){
+            var booleanTerm = changes[key].newValue[outletOn];
+            sendToggle(response, outletOn, booleanTerm);
+          };
+        });
       };
-    });
+    };
   });
 };
 
-function sendToggle(userToken, outletOn, booleanTerm){
-  var url = "http://localhost:3000/api/toggle?"+outletOn+"="+booleanTerm+"&google_credentials="+userToken;
+function sendToggle(userEmail, outletOn, booleanTerm){
+  var url = "http://localhost:3000/api/toggle?"+outletOn+"="+booleanTerm+"&google_credentials="+userEmail;
   return new Promise(function(resolve, reject){
 
     var request = new XMLHttpRequest();
