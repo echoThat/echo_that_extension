@@ -15,6 +15,7 @@ window.onmouseup = function(event1) {
       echoFormExists = true;
       echoFormSubmit();
       hideSpawnedEcho();
+      closeEchoFormWithEsc();
     };
   };
 };
@@ -28,6 +29,14 @@ function closeEchoFormAfterSubmit() {
   setTimeout(function(){
     closeEchoForm();
   }, 1250);
+};
+
+function closeEchoFormWithEsc() {
+  document.addEventListener('keyup', function(event) {
+    if (event.keyCode == 27) {
+      closeEchoForm();
+    };
+  });
 };
 
 function echoThat() {
