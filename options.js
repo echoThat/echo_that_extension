@@ -155,10 +155,8 @@ function sendAnyUserChanges(){
         });
 
       }).then(function(response){
-          for(outletOn in changes[key].newValue){
-            var booleanTerm = changes[key].newValue[outletOn];
-            sendToggle(response, outletOn, booleanTerm);
-          };
+          var booleanTerm = changes[key].newValue;
+          sendToggle(response, key, booleanTerm);
         });
       };
     };
@@ -166,11 +164,10 @@ function sendAnyUserChanges(){
 };
 
 function sendToggle(userEmail, outletOn, booleanTerm){
-  var url = "http://localhost:3000/api/toggle?"+outletOn+"="+booleanTerm+"&google_credentials="+userEmail;
+  var postUrl = "http://localhost:3000/api/toggle?"+outletOn+"="+booleanTerm+"&google_credentials="+userEmail;
   return new Promise(function(resolve, reject){
-
     var request = new XMLHttpRequest();
-    request.open('post', url, true);
+    request.open('post', postUrl, true);
     request.onload = function(){
       if(request.status == 200){
         resolve(request.response);
@@ -179,11 +176,9 @@ function sendToggle(userEmail, outletOn, booleanTerm){
         reject(Error(request.statusText));
       }
     };
-
     request.onerror = function() {
       reject(Error("Network Error"));
     };
-
     request.send();
   });
 };
