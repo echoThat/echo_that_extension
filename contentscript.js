@@ -15,6 +15,7 @@ window.onmouseup = function(event1) {
       echoFormExists = true;
       echoFormSubmit();
       hideSpawnedEcho();
+      closeEchoFormWithEsc();
     };
   };
 };
@@ -26,10 +27,16 @@ function rangeIsSelected() {
 function closeEchoFormAfterSubmit() {
   echoThat();
   setTimeout(function(){
-    var echoFrame = document.getElementsByClassName("echo-frame")[0];
-    body.removeChild(echoFrame);
-    echoFormExists = false;
+    closeEchoForm();
   }, 1250);
+};
+
+function closeEchoFormWithEsc() {
+  document.addEventListener('keyup', function(event) {
+    if (event.keyCode == 27) {
+      closeEchoForm();
+    };
+  });
 };
 
 function echoThat() {
@@ -73,11 +80,18 @@ function hideSpawnedEcho() {
   document.onmousedown = function(event4) {
     var echoFrame = document.getElementsByClassName("echo-frame")[0];
 
-    if (spawnedEcho && !checkClickEventWithinForm(event, echoFrame)) {
-      body.removeChild(echoFrame);
-      echoFormExists = false;
-      spawnedEcho = false;
+    if (!checkClickEventWithinForm(event, echoFrame)) {
+      closeEchoForm();
     };
+  };
+};
+
+function closeEchoForm() {
+  if (spawnedEcho) {
+    var echoFrame = document.getElementsByClassName("echo-frame")[0];
+    document.body.removeChild(echoFrame);
+    echoFormExists = false;
+    spawnedEcho = false;
   };
 };
 
