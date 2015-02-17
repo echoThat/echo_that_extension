@@ -2,6 +2,8 @@ document.addEventListener('DOMContentLoaded', function() {
   userRailsOauth();
   twitterOauthStarter();
   facebookOauthStarter();
+  showPostSettings();
+  postChangeListen();
 });
 
 
@@ -61,5 +63,122 @@ function facebookOauthStarter() {
   document.getElementById('FacebookEchoAuth').addEventListener('click', function(event) {
     event.preventDefault();
     RailsFacebookOauth();
+  });
+};
+
+function showPostSettings(){
+  showTwitterSettings();
+  showFacebookSettings();
+};
+
+function showTwitterSettings(){
+  chrome.storage.sync.get("twitterOn", function(result){
+    var twitterStatus = (result.twitterOn);
+
+    if( twitterStatus === false ){
+      document.getElementById('twitter-toggle').removeAttribute('checked');
+    } else {
+      document.getElementById('twitter-toggle').setAttribute('checked', true);
+    };
+  });
+};
+
+function showFacebookSettings(){
+  chrome.storage.sync.get("facebookOn", function(result){
+    var facebookStatus = (result.facebookOn);
+
+    if( facebookStatus === false ){
+      document.getElementById('facebook-toggle').removeAttribute('checked');
+    } else {
+      document.getElementById('facebook-toggle').setAttribute('checked', true);
+    };
+  });
+};
+
+function postChangeListen(){
+  evalTwitterChanges();
+  evalFacebookChanges();
+  sendAnyUserChanges();
+};
+
+function evalTwitterChanges(){
+  document.getElementById("twitter-switch-listener").addEventListener("click", function(event){
+    event.preventDefault();
+    var checkbox = document.getElementById("twitter-toggle")
+    var oldStatus = checkbox.getAttribute("checked");
+
+    if(!oldStatus){
+      checkbox.setAttribute("checked", true);
+      chrome.storage.sync.set({"twitterOn":true}, function(response){
+        console.log("echoThat to twitter enabled");
+      });
+    } else {
+      checkbox.removeAttribute("checked");
+      chrome.storage.sync.set({"twitterOn":false}, function(response){
+        console.log("echoThat to twitter disabled");
+      });
+    };
+  });
+};
+
+function evalFacebookChanges(){
+  document.getElementById("facebook-switch-listener").addEventListener("click", function(event){
+    event.preventDefault();
+    var checkbox = document.getElementById("facebook-toggle")
+    var oldStatus = checkbox.getAttribute("checked");
+
+    if(!oldStatus){
+      checkbox.setAttribute("checked", true);
+      chrome.storage.sync.set({"facebookOn":true}, function(response){
+        console.log("echoThat to facebook enabled");
+      });
+    } else {
+      checkbox.removeAttribute("checked");
+      chrome.storage.sync.set({"facebookOn":false}, function(response){
+        console.log("echoThat to facebook disabled");
+      });
+    };
+  });
+};
+
+function sendAnyUserChanges(){
+  chrome.storage.onChanged.addListener(function(changes, namespace) {
+    for(key in changes){
+    if(key === "chrome_token"){
+      return "echoThat token set";
+    }
+    else {
+      new Promise(function(resolve, reject){
+        chrome.identity.getProfileUserInfo(function(userInfo){
+          resolve(userInfo.email);
+          reject(Error("Unable to retrieve userInfo for echoThat"));
+        });
+
+      }).then(function(response){
+          var booleanTerm = changes[key].newValue;
+          sendToggle(response, key, booleanTerm);
+        });
+      };
+    };
+  });
+};
+
+function sendToggle(userEmail, outletOn, booleanTerm){
+  var postUrl = "http://www.thatecho.co/api/toggle?"+outletOn+"="+booleanTerm+"&google_credentials="+userEmail;
+  return new Promise(function(resolve, reject){
+    var request = new XMLHttpRequest();
+    request.open('post', postUrl, true);
+    request.onload = function(){
+      if(request.status == 200){
+        resolve(request.response);
+      }
+      else {
+        reject(Error(request.statusText));
+      }
+    };
+    request.onerror = function() {
+      reject(Error("Network Error"));
+    };
+    request.send();
   });
 };

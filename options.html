@@ -4,18 +4,45 @@
     <link rel="stylesheet" type="text/css" href="options.css">
     <script src="options.js"></script>
   </head>
-  <body class="echo-opts">
+  <body id="echo-opts">
     <h2>echoThat</h2>
     <div class="echo-that-logo">
       <div id="sage-sound-logo">
         <img src="sage_sound.png">
       </div>
     </div>
-    <div class="echo-opt-button">
-      <a href="#" id="TwitterEchoAuth"><button>connect to<br>Twitter</button></a>
+
+    <div class="auth-frame">
+      <img src="Twitter_logo_white.png">
+      <div class="onoffswitch-wrapper" id="twitter-switch-listener">
+        <div class="onoffswitch">
+            <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="twitter-toggle">
+            <label class="onoffswitch-label" for="twitter-toggle">
+                <span class="onoffswitch-inner"></span>
+                <span class="onoffswitch-switch"></span>
+            </label>
+        </div>
+      </div>
+      <div class="echo-opt-button">
+        <a href="#" id="TwitterEchoAuth"><button>connect to<br>Twitter</button></a>
+      </div>
     </div>
-    <div class="echo-opt-button">
-      <a href="#" id="FacebookEchoAuth"><button>connect to<br>Facebook</button></a>
+
+    <div class="auth-frame">
+      <img src="FB_logo_white.png">
+      <div class="onoffswitch-wrapper" id="facebook-switch-listener">
+        <div class="onoffswitch">
+            <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="facebook-toggle">
+            <label class="onoffswitch-label" for="facebook-toggle">
+                <span class="onoffswitch-inner"></span>
+                <span class="onoffswitch-switch"></span>
+            </label>
+        </div>
+      </div>
+      <div class="echo-opt-button">
+        <a href="#" id="FacebookEchoAuth"><button>connect to<br>Facebook</button></a>
+      </div>
     </div>
+
   </body>
 </html>
