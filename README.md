@@ -1,6 +1,6 @@
 ## README
 
-echoThat is an extension for google chrome that allows users to share across social media networks with a key stroke and a click. Highlight content and press cmd + e to call up the echoThat widget.
+echoThat is an extension for google chrome that allows users to share across social media networks with a key stroke and a click. Highlight content and press ctrl + e to call up the echoThat widget.
 
 ![echoThat widget](/echoThat-titan.png)
 
