@@ -55,7 +55,7 @@ function twitterOauthStarter() {
 function RailsFacebookOauth() {
   chrome.identity.getProfileUserInfo(function(userInfo) {
     var message = JSON.stringify(userInfo);
-    chrome.tabs.create({ url: "http://www.thatecho.co/auth/facebook?scope=publish_actions&google_credentials=" + userInfo.email  });
+    chrome.tabs.create({ url: "https://echoko.herokuapp.com/auth/facebook?scope=publish_actions&google_credentials=" + userInfo.email  });
   });
 };
 
