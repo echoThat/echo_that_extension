@@ -13,6 +13,7 @@ window.onmouseup = function(event1) {
       spawnedEcho = spawnEchoForm(event1.pageX, event1.pageY, selectedString);
       window.getSelection().removeAllRanges();
       echoFormExists = true;
+      document.getElementById("userEchoText").focus();
       echoFormSubmit();
       hideSpawnedEcho();
       closeEchoFormWithEsc();
