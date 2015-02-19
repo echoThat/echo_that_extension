@@ -8,6 +8,8 @@
     display: inline;
     min-height: 0;
     min-width: 0;
+    font-family: Georgia, Serif;
+    font-size: 16px;
   }
 /*end reset, begin specific style*/
 
@@ -64,8 +66,8 @@ div.echoLeftWrapper {
   background-color: #ecf0f1;
   color: #333333;
   padding: 3px 5px 2px 5px;
-  font-family: monospace;
-  font-size: 15px;
+  font-family: Georgia, Serif;
+  font-size: 16px;
   text-indent: 1px;
   word-wrap: normal;
   line-height: normal;
@@ -87,7 +89,7 @@ input#userEchoText {
   background-color: #ecf0f1;
   color: #333333;
   padding: 3px 5px 2px 5px;
-  font-family: monospace;
+  font-family: Georgia, Serif;
   font-size: 15px;
   text-indent: 1px;
   line-height: normal;
@@ -133,14 +135,14 @@ div.echoRightWrapper {
 #char-count {
   display: inline-block;
   position: absolute;
-  right: 23%;
+  right: 21%;
   bottom: 10%;
   float: right;
   clear: right;
   width: 30px;
   height: 30px;
   opacity: .8;
-  font-family: monospace;
+  font-family: monospace, courier, Serif;
   font-size: 13px;
   line-height: 0px;
   text-align: left;
