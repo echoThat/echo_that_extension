@@ -22,9 +22,9 @@
   },
 
   "browser_action": {
-    "default_icon" : "icon.png",
+    "default_icon" : "icon_38.png",
     "default_popup" : "options.html",
-    "default_title" : "Click to disable onPoint"
+    "default_title" : "Click to configure echoThat"
   },
 
   "background" : {
@@ -39,5 +39,8 @@
   "content_scripts" : [{
     "matches" : ["<all_urls>"],
     "js" : ["contentscript.js"]
-    }]
+    }],
+
+  "icons": {  "38": "icon_38.png",
+              "128": "logo_128.png" }
 }
