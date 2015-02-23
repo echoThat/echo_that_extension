@@ -1,0 +1,13 @@
+echoThat lets you share content from anywhere online without the distraction of a noisy social media interface.
+
+echoThat is an extension for Google Chrome that allows users to share across social media networks with a keystroke and a click. Highlight content and press ctrl + e to call up the echoThat widget.
+
+On the widget, you can edit the quoted text and add your own commentary before echoing it out to social media.
+
+All echos will have a shortened link to the page you sent them from. The echoThat character counter takes the link into account.
+
+We currently support echos through Twitter and Facebook. These networks can be quickly set up with one-time authorization through the echoThat popup menu, called by clicking our icon at the top of your browser.
+
+In the popup menu, you can also quickly enable or disable posting to your social networks one by one, by toggling on/off switches.
+
+We built echoThat to make sharing quick and customizable. Enjoy!
