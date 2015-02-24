@@ -6,6 +6,8 @@ On the widget, you can edit the quoted text and add your own commentary before e
 
 All echos will have a shortened link to the page you sent them from. The echoThat character counter takes the link into account.
 
+echoThat requires for the user to be signed into their chrome browser to work correctly.
+
 We currently support echos through Twitter and Facebook. These networks can be quickly set up with one-time authorization through the echoThat popup menu, called by clicking our icon at the top of your browser.
 
 In the popup menu, you can also quickly enable or disable posting to your social networks one by one, by toggling on/off switches.
