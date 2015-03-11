@@ -172,11 +172,15 @@ function sendAnyUserChanges(){
   });
 };
 
-function sendToggle(userEmail, outletOn, booleanTerm){
-  var postUrl = "http://www.thatecho.co/api/toggle?"+outletOn+"="+booleanTerm+"&google_credentials="+userEmail;
+function sendToggle(userData){
+  var postUrl = "http://www.thatecho.co/api/toggle"
+  var message = JSON.stringify(userData);
+
   return new Promise(function(resolve, reject){
     var request = new XMLHttpRequest();
     request.open('post', postUrl, true);
+    request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+    request.setRequestHeader("Accept", "application/json");
     request.onload = function(){
       if(request.status == 200){
         resolve(request.response);
@@ -188,6 +192,6 @@ function sendToggle(userEmail, outletOn, booleanTerm){
     request.onerror = function() {
       reject(Error("Network Error"));
     };
-    request.send();
+    request.send(message);
   });
 };
