@@ -143,31 +143,44 @@ function evalFacebookChanges(){
 
 function sendAnyUserChanges(){
   chrome.storage.onChanged.addListener(function(changes, namespace) {
+    var userData = {};
     for(key in changes){
     if(key === "chrome_token"){
       return "echoThat token set";
     }
     else {
       new Promise(function(resolve, reject){
-        chrome.identity.getProfileUserInfo(function(userInfo){
-          resolve(userInfo.email);
-          reject(Error("Unable to retrieve userInfo for echoThat"));
+        chrome.identity.getProfileUserInfo(function(userInfo) {
+          userData['google_credentials'] = userInfo.email;
         });
-
+        chrome.storage.sync.get('chrome_token', function(items) {
+          userData['chrome_token'] = items.chrome_token
+        });
+        var timer = setInterval(function() {
+          if (userData['google_credentials'] != null && userData['chrome_token'] != null) {
+            resolve(userData);
+            clearInterval(timer);
+          }
+        }, 100)
       }).then(function(response){
-          var booleanTerm = changes[key].newValue;
-          sendToggle(response, key, booleanTerm);
+          response['outlet'] = key
+          response['booleanTerm'] = changes[key].newValue;
+          sendToggle(response);
         });
       };
     };
   });
 };
 
-function sendToggle(userEmail, outletOn, booleanTerm){
-  var postUrl = "http://www.thatecho.co/api/toggle?"+outletOn+"="+booleanTerm+"&google_credentials="+userEmail;
+function sendToggle(userData){
+  var postUrl = "http://www.thatecho.co/api/toggle"
+  var message = JSON.stringify(userData);
+
   return new Promise(function(resolve, reject){
     var request = new XMLHttpRequest();
     request.open('post', postUrl, true);
+    request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+    request.setRequestHeader("Accept", "application/json");
     request.onload = function(){
       if(request.status == 200){
         resolve(request.response);
@@ -179,6 +192,6 @@ function sendToggle(userEmail, outletOn, booleanTerm){
     request.onerror = function() {
       reject(Error("Network Error"));
     };
-    request.send();
+    request.send(message);
   });
 };
