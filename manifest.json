@@ -4,7 +4,7 @@
   "description": "Share on social media with a keystroke (ctrl+e when text is highlighted).",
   "version": "0.1.5",
   "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA3e/tWPtpPptxgpuaPnrvmhZ5IHRqmXNKCuCY0BDDirEAULUG/eVG4AriWno5VvJI1t1k+M34WUCbiP9Fg8lsaUbJyGwwycKVVCcXJ5e01/UlUmnYOrjmWM1L4S/7425gcoVXLl2P9AY7Whd8xIiLV0HVCisR3JWPOdo3r3bEUVs+R2kByFLXr/YSHBEWmJmD2xwK9fD7wF+S6sErXKjDoaVyLiGEDkeludDrNWlgrPjncyS3WKBm1jqGievIlJmKiQ3wPlZCXEdURzna8f9DB+JxzSYa9QBl7EMrR2BQcUEZlhrziCLcZRr+3pCpikIR+y5/2CxlWnDDxcOLgQswHwIDAQAB",
-  "icons": {  "38": "icon38.png", "48":"icon38.png", "128": "icon128.png" },
+  "icons": {  "38": "icon38.png", "48":"icon128.png", "128": "icon128.png" },
   "options_page" : "options.html",
   "permissions": [
     "activeTab",
