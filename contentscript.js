@@ -10,7 +10,7 @@ window.onmouseup = function(event1) {
       event2.preventDefault();
       var selectedString = '"'+ window.getSelection().toString() + '"';
       // not protected variable!
-      spawnedEcho = spawnEchoForm(event1.pageX, event1.pageY, selectedString);
+      spawnedEcho = spawnEchoForm(event1.clientX, event1.clientY, selectedString);
       window.getSelection().removeAllRanges();
       echoFormExists = true;
       document.getElementById("userEchoText").focus();

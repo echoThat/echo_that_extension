@@ -14,7 +14,7 @@
 /*end reset, begin specific style*/
 
 div.echo-frame {
-  position: absolute;
+  position: fixed;
   width: 360px;
   height: 120px;
   background-color: #50443C;
