@@ -1,0 +1,20 @@
+NOTE: Please feel free to use the account "Echo ThatApp" to test this. That will allow us to demonstrate what the functionality will be like once we are authorized for publish_actions.
+
+1: Use google Chrome, an be sure you are logged in to the browser using your google account.
+
+2: Install our extension by clicking "Add to Chrome" at this link (you'll have to accept the chrome permissions we ask for): https://chrome.google.com/webstore/detail/echothat/clbbcmmpgpilnnaengcjkchkgheflgpg/related
+
+3: Restart the chrome browser.
+
+4: Click the Echo That icon in your Chrome browser, right of the url bar, to show the configuration popup.  Select "connect to Facebook." You will be redirected to facebook.
+
+5: If you are not logged in to facebook, you will need to do so.
+*Note: As an Echo That user, you will NOT be logging into Echo That via facebook. This is an outside redirect for a one-time grant of permission for us to post on your behalf when you use our echo function.
+
+6: Accept the "publish_actions" permission. You will be redirected to an instructional Echo That page.
+
+7: To post to facebook via echoThat, open a new tab and find some text you'd like to post--at your favorite news site, for example.
+
+8: From any web page, highlight text and press ctrl+e to call up the echoThat widget. Click the echoThat button--on the right side of the widget--to post the quote you highlighted, with a link and any comments you'd like to add on the bottom line, to facebook.
+
+8: You can disable and enable facebook sharing with the on/off switch on the Echo That menu.
