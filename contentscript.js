@@ -61,13 +61,18 @@ function echoFormSubmit() {
 
     var finalUserHighLight = document.getElementById("userHighLight").value
     var userText = document.getElementById("userEchoText").value;
+
     var echoString = charEncoding(finalUserHighLight + " "
     + userText)
+    var echoHash = {
+      "echoQuote": charEncoding(finalUserHighLight),
+      "userText" : charEncoding(userText)
+    };
 
     closeEchoFormAfterSubmit();
 
     chrome.runtime.sendMessage({
-      message: echoString
+      message: echoHash
     }, function(response) {
       // response from eventpage.js
     });
